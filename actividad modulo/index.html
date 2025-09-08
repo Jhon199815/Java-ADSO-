@@ -1,0 +1,339 @@
+<!-- =============================
+Archivo: index.html
+Descripción: Estructura HTML limpia que referencia styles.css
+============================= -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilidades y Proyectos – Rediseño</title>
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Estilos propios -->
+  <link href="styles.css" rel="stylesheet">
+  <!-- Librerías usadas por tu main.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <span class="navbar-brand d-flex align-items-center gap-2">
+        <i class="bi bi-collection"></i>
+        Utilidades y Proyectos JS
+      </span>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <span class="brand-badge"><i class="bi bi-lightning-charge-fill"></i> Jhon Diaz</span>
+        <button id="toggleTheme" class="btn btn-outline-light btn-sm rounded-pill"><i class="bi bi-moon-stars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TABS -->
+  <div class="tabbar border-bottom py-2">
+    <div class="container">
+      <ul class="nav nav-pills scroll-pills" id="appTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-contactos" data-bs-toggle="tab" data-bs-target="#panel-contactos" type="button" role="tab">
+            <i class="bi bi-person-lines-fill me-1"></i> Contactos & Libros
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-finanzas" data-bs-toggle="tab" data-bs-target="#panel-finanzas" type="button" role="tab">
+            <i class="bi bi-piggy-bank me-1"></i> Finanzas
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-salud" data-bs-toggle="tab" data-bs-target="#panel-salud" type="button" role="tab">
+            <i class="bi bi-heart-pulse me-1"></i> Salud
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-util" data-bs-toggle="tab" data-bs-target="#panel-util" type="button" role="tab">
+            <i class="bi bi-tools me-1"></i> Utilidades
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="container my-4">
+    <div class="tab-content" id="appTabsContent">
+
+      <!-- CONTACTOS & LIBROS -->
+      <div class="tab-pane fade show active" id="panel-contactos" role="tabpanel" aria-labelledby="tab-contactos">
+        <div class="row section-grid">
+
+          <!-- Contactos -->
+          <div class="col-12">
+            <div class="card app-card">
+              <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="fw-bold"><i class="bi bi-person-lines-fill me-2"></i> Gestor de contactos</span>
+                  <small class="opacity-75"><i class="bi bi-info-circle"></i> Agrega, edita, elimina y busca contactos.</small>
+                </div>
+              </div>
+              <div class="card-body">
+                <form id="formContacto" class="row g-2 align-items-end">
+                  <div class="col-md-2">
+                    <label for="identificacion" class="form-label">Identificación</label>
+                    <input type="text" id="identificacion" class="form-control rounded-pill-input" required>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control rounded-pill-input" required>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" id="apellido" class="form-control rounded-pill-input" required>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="email" id="correo" class="form-control rounded-pill-input" required>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="celular" class="form-label">Celular</label>
+                    <input type="text" id="celular" class="form-control rounded-pill-input" required>
+                  </div>
+                  <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill"><i class="bi bi-person-plus"></i></button>
+                  </div>
+                </form>
+
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <input type="text" id="buscarId" class="form-control rounded-pill-input mb-2" placeholder="Buscar por identificación">
+                  </div>
+                  <div class="col-md-2">
+                    <button id="btnBuscar" class="btn btn-info w-100 mb-2 rounded-pill"><i class="bi bi-search"></i> Buscar</button>
+                  </div>
+                  <div class="col-md-2">
+                    <button id="btnLimpiar" class="btn btn-secondary w-100 mb-2 rounded-pill"><i class="bi bi-eraser"></i> Limpiar</button>
+                  </div>
+                  <div class="col-md-4">
+                    <span id="mensajeContacto" class="alert alert-warning d-none w-100 p-2 rounded-pill"></span>
+                  </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+                  <table class="table table-striped align-middle">
+                    <thead>
+                      <tr>
+                        <th>Identificación</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Celular</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaContactos"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Libros -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="fw-bold"><i class="bi bi-book me-2"></i> Consulta de libros</span>
+                <small class="opacity-75"><i class="bi bi-info-circle"></i> Busca por palabra o lista todos.</small>
+              </div>
+              <div class="card-body">
+                <label for="inputPalabraLibro" class="form-label w-100">Palabra clave en el título</label>
+                <div class="input-group mb-3">
+                  <input type="text" id="inputPalabraLibro" class="form-control rounded-pill-input" placeholder="Buscar libro">
+                  <button id="btnBuscarLibro" class="btn btn-primary rounded-pill"><i class="bi bi-search"></i> Buscar</button>
+                </div>
+                <ul id="resultadoLibros" class="list-group mb-3"></ul>
+                <button id="btnListarPaginas" class="btn btn-outline-secondary w-100 rounded-pill">Listar títulos y páginas</button>
+                <ul id="resultadoPaginas" class="list-group mt-3"></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ayuda rápida -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-question-circle me-2"></i> Consejos rápidos</span></div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Pulsa <span class="kbd">Tab</span> para saltar entre campos.</li>
+                  <li class="list-group-item">En <strong>Contactos</strong>, usa el buscador por identificación para filtrar.</li>
+                  <li class="list-group-item">En <strong>Libros</strong>, escribe una palabra clave y presiona <em>Buscar</em>.</li>
+                  <li class="list-group-item">Atajos: <span class="kbd">/</span> enfoca el buscador de Libros (si tu <code>main.js</code> lo soporta).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FINANZAS -->
+      <div class="tab-pane fade" id="panel-finanzas" role="tabpanel" aria-labelledby="tab-finanzas">
+        <div class="row section-grid">
+          <!-- Alcancía -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <span class="fw-bold"><i class="bi bi-piggy-bank fs-5 me-2"></i> Alcancía virtual</span>
+                <small class="opacity-75"><i class="bi bi-info-circle"></i> Toca una fila para añadir esa moneda.</small>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <label for="denominacion" class="form-label">Agregar moneda</label>
+                <div class="input-group mb-3">
+                  <select id="denominacion" class="form-select">
+                    <option value="200">$200</option>
+                    <option value="500">$500</option>
+                    <option value="1000">$1000</option>
+                  </select>
+                  <button id="agregar" class="btn btn-outline-primary">Agregar</button>
+                </div>
+                <ul id="listaAlcancia" class="list-group mb-3">
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-pill mb-2" data-denom="200" style="cursor:pointer;">
+                    $200 <span id="c200" class="badge bg-primary rounded-pill">0</span>
+                  </li>
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-pill mb-2" data-denom="500" style="cursor:pointer;">
+                    $500 <span id="c500" class="badge bg-primary rounded-pill">0</span>
+                  </li>
+                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-pill" data-denom="1000" style="cursor:pointer;">
+                    $1000 <span id="c1000" class="badge bg-primary rounded-pill">0</span>
+                  </li>
+                </ul>
+                <div class="mb-3"><strong>Total ahorrado: $<span id="total">0</span></strong></div>
+                <div class="d-flex gap-2 mb-2">
+                  <button id="romper" class="btn btn-danger flex-fill rounded-pill"><i class="bi bi-emoji-dizzy"></i> Romper</button>
+                  <button id="nueva" class="btn btn-secondary flex-fill rounded-pill"><i class="bi bi-arrow-repeat"></i> Nueva</button>
+                </div>
+                <div id="mensaje" class="alert alert-warning d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Descuento -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-percent me-2"></i> Calcular descuento</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputDescuento" class="form-label w-100 text-center">Precio del producto</label>
+                <input type="number" id="inputDescuento" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Precio">
+                <button id="btnDescuento" class="btn btn-primary w-100 mb-2 rounded-pill">Calcular</button>
+                <div id="resultadoDescuento" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Préstamo -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-cash-coin me-2"></i> Elegibilidad para préstamo</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputSalario" class="form-label w-100 text-center">Salario mensual</label>
+                <input type="number" id="inputSalario" class="form-control mb-2 w-100 rounded-pill-input" placeholder="Salario">
+                <label for="inputPuntaje" class="form-label w-100 text-center">Puntaje de crédito</label>
+                <input type="number" id="inputPuntaje" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Puntaje de crédito">
+                <button id="btnPrestamo" class="btn btn-primary w-100 mb-2 rounded-pill">Verificar elegibilidad</button>
+                <div id="resultadoPrestamo" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALUD -->
+      <div class="tab-pane fade" id="panel-salud" role="tabpanel" aria-labelledby="tab-salud">
+        <div class="row section-grid">
+          <!-- IMC -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-person-bounding-box me-2"></i> Categoría IMC</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputIMC" class="form-label w-100 text-center">Índice de masa corporal</label>
+                <input type="number" id="inputIMC" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Ej: 22.5" step="0.1">
+                <button id="btnIMC" class="btn btn-primary w-100 mb-2 rounded-pill">Calcular</button>
+                <div id="resultadoIMC" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Riesgo -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-heart-pulse me-2"></i> Nivel de riesgo</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputEdad" class="form-label w-100 text-center">Edad</label>
+                <input type="number" id="inputEdad" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Edad">
+                <div class="form-check mb-3 w-100">
+                  <input type="checkbox" class="form-check-input" id="inputEnfermedad">
+                  <label class="form-check-label" for="inputEnfermedad">¿Tiene enfermedades previas?</label>
+                </div>
+                <button id="btnRiesgo" class="btn btn-primary w-100 mb-2 rounded-pill">Calcular riesgo</button>
+                <div id="resultadoRiesgo" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UTILIDADES -->
+      <div class="tab-pane fade" id="panel-util" role="tabpanel" aria-labelledby="tab-util">
+        <div class="row section-grid">
+          <!-- Rango -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-arrows-expand me-2"></i> Verificar rango (10 a 50)</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputRango" class="form-label w-100 text-center">Número</label>
+                <input type="number" id="inputRango" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Ingresa un número">
+                <button id="btnRango" class="btn btn-primary w-100 mb-2 rounded-pill">Verificar</button>
+                <div id="resultadoRango" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Bisiesto -->
+          <div class="col-12 col-lg-6">
+            <div class="card app-card h-100">
+              <div class="card-header"><span class="fw-bold"><i class="bi bi-calendar2-week me-2"></i> ¿Año bisiesto?</span></div>
+              <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <label for="inputBisiesto" class="form-label w-100 text-center">Año</label>
+                <input type="number" id="inputBisiesto" class="form-control mb-3 w-100 rounded-pill-input" placeholder="Ej: 2024">
+                <button id="btnBisiesto" class="btn btn-primary w-100 mb-2 rounded-pill">Verificar</button>
+                <div id="resultadoBisiesto" class="alert alert-info d-none w-100 text-center rounded-pill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Tu lógica existente -->
+  <script type="module" src="main.js"></script>
+
+  <!-- Script tema oscuro/claro (no interfiere con main.js) -->
+  <script>
+    (function(){
+      const btn = document.getElementById('toggleTheme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const saved = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+      setTheme(saved);
+      btn.addEventListener('click', () => setTheme(document.documentElement.dataset.bsTheme === 'dark' ? 'light' : 'dark'));
+      function setTheme(mode){
+        document.documentElement.dataset.bsTheme = mode;
+        localStorage.setItem('theme', mode);
+        btn.innerHTML = mode === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,37 @@
+[
+  {
+    "titulo": "Cien años de soledad",
+    "autor": "Gabriel García Márquez",
+    "numeroPaginas": 417,
+    "editorial": "Sudamericana",
+    "idioma": "Español"
+  },
+  {
+    "titulo": "El amor en los tiempos del cólera",
+    "autor": "Gabriel García Márquez",
+    "numeroPaginas": 348,
+    "editorial": "Oveja Negra",
+    "idioma": "Español"
+  },
+  {
+    "titulo": "Don Quijote de la Mancha",
+    "autor": "Miguel de Cervantes",
+    "numeroPaginas": 863,
+    "editorial": "Francisco de Robles",
+    "idioma": "Español"
+  },
+  {
+    "titulo": "One Hundred Years of Solitude",
+    "autor": "Gabriel García Márquez",
+    "numeroPaginas": 417,
+    "editorial": "Harper & Row",
+    "idioma": "Inglés"
+  },
+  {
+    "titulo": "The Little Prince",
+    "autor": "Antoine de Saint-Exupéry",
+    "numeroPaginas": 96,
+    "editorial": "Reynal & Hitchcock",
+    "idioma": "Inglés"
+  }
+]
